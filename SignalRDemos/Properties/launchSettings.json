@@ -9,10 +9,11 @@
 		}
 	},
 	"profiles": {
-		"IIS Express": {
-			"commandName": "IISExpress",
+		"SignalRDemos": {
+			"commandName": "Project",
 			"launchBrowser": true,
 			"launchUrl": "simple-chat-hub",
+			"applicationUrl": "https://localhost:5001;http://localhost:5000",
 			"environmentVariables": {
 				"CORS_ALLOWED_ORIGINS": "http://localhost:3000, https://localhost:3000",
 				"ASPNETCORE_ENVIRONMENT": "Development"
