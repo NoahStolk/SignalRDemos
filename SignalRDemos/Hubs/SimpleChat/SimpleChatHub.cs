@@ -13,6 +13,11 @@ namespace SignalRDemos.Hubs.SimpleChat
 		}
 
 		#region Main events
+
+		/// <summary>
+		/// Handles the join event that occurs when a client requests to join a group.
+		/// </summary>
+		/// <param name="connectionInfo">The <see cref="UserSessionConnectionInfo"/> object representing this member.</param>
 		public override async Task ClientSendJoin(UserSessionConnectionInfo connectionInfo)
 		{
 			await base.ClientSendJoin(connectionInfo);
@@ -24,6 +29,10 @@ namespace SignalRDemos.Hubs.SimpleChat
 			await BroadcastColors(Clients.Caller);
 		}
 
+		/// <summary>
+		/// Handles the leave event that occurs when a client requests to leave a group.
+		/// </summary>
+		/// <param name="connectionInfo">The <see cref="UserSessionConnectionInfo"/> object representing this member.</param>
 		public override async Task ClientSendLeave(UserSessionConnectionInfo connectionInfo)
 		{
 			await base.ClientSendLeave(connectionInfo);
@@ -40,9 +49,11 @@ namespace SignalRDemos.Hubs.SimpleChat
 
 			await BroadcastColors(Clients.Group(GroupName));
 		}
+
 		#endregion
 
 		#region Hub-specific events
+
 		public async Task ClientSendMessage(SimpleChatClientSendMessage clientSendMessage)
 		{
 			await BroadcastMessage(Clients.Group(GroupName), clientSendMessage);
@@ -60,9 +71,11 @@ namespace SignalRDemos.Hubs.SimpleChat
 			groupData.UserColors[clientSendColor.User] = clientSendColor.Color;
 			await BroadcastColors(Clients.Group(GroupName));
 		}
+
 		#endregion
 
 		#region Responses
+
 		private async Task BroadcastMessage(ISimpleChatClient client, SimpleChatClientSendMessage clientSendMessage)
 		{
 			SimpleChatClientReceiveMessage clientReceiveMessage = new SimpleChatClientReceiveMessage
@@ -83,6 +96,7 @@ namespace SignalRDemos.Hubs.SimpleChat
 
 			await client.ClientReceiveColors(clientReceiveEvent);
 		}
+
 		#endregion
 	}
 }

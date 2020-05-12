@@ -2,7 +2,7 @@
 
 namespace SignalRDemos.Hubs
 {
-	public abstract class AbstractClientSendEvent
+	public interface IClientSendEvent
 	{
 		public User User { get; set; }
 	}
