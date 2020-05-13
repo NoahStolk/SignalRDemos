@@ -26,7 +26,7 @@ namespace SignalRDemos.Hubs.SimpleChat
 			if (!SimpleChatStorage.Instance.GroupData.ContainsKey(GroupName))
 				return;
 
-			await BroadcastColors(Clients.Caller);
+			await Clients.Caller.BroadcastColors(GroupName);
 		}
 
 		/// <summary>
@@ -47,7 +47,7 @@ namespace SignalRDemos.Hubs.SimpleChat
 
 			groupData.UserColors.Remove(connectionInfo.User);
 
-			await BroadcastColors(Clients.Group(GroupName));
+			await Clients.Group(GroupName).BroadcastColors(GroupName);
 		}
 
 		#endregion
@@ -56,7 +56,7 @@ namespace SignalRDemos.Hubs.SimpleChat
 
 		public async Task ClientSendMessage(SimpleChatClientSendMessage clientSendMessage)
 		{
-			await BroadcastMessage(Clients.Group(GroupName), clientSendMessage);
+			await Clients.Group(GroupName).BroadcastMessage(clientSendMessage);
 		}
 
 		public async Task ClientSendColor(SimpleChatClientSendColor clientSendColor)
@@ -69,32 +69,7 @@ namespace SignalRDemos.Hubs.SimpleChat
 
 			// Store the new data.
 			groupData.UserColors[clientSendColor.User] = clientSendColor.Color;
-			await BroadcastColors(Clients.Group(GroupName));
-		}
-
-		#endregion
-
-		#region Responses
-
-		private async Task BroadcastMessage(ISimpleChatClient client, SimpleChatClientSendMessage clientSendMessage)
-		{
-			SimpleChatClientReceiveMessage clientReceiveMessage = new SimpleChatClientReceiveMessage
-			{
-				User = clientSendMessage.User,
-				Message = clientSendMessage.Message
-			};
-
-			await client.ClientReceiveMessage(clientReceiveMessage);
-		}
-
-		private async Task BroadcastColors(ISimpleChatClient client)
-		{
-			SimpleChatClientReceiveColors clientReceiveEvent = new SimpleChatClientReceiveColors
-			{
-				Colors = SimpleChatStorage.Instance.GroupData[GroupName].UserColors
-			};
-
-			await client.ClientReceiveColors(clientReceiveEvent);
+			await Clients.Group(GroupName).BroadcastColors(GroupName);
 		}
 
 		#endregion
