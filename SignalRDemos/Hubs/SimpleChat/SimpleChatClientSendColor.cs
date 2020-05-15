@@ -1,12 +1,9 @@
-﻿using SignalRDemos.Users;
-using System.Drawing;
-
-namespace SignalRDemos.Hubs.SimpleChat
+﻿namespace SignalRDemos.Hubs.SimpleChat
 {
 	public class SimpleChatClientSendColor : IClientSendEvent
 	{
-		public User User { get; set; }
+		public string UserId { get; set; }
 
-		public Color Color { get; set; }
+		public string Color { get; set; }
 	}
 }

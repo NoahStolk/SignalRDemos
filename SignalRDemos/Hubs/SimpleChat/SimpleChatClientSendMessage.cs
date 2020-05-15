@@ -1,10 +1,8 @@
-﻿using SignalRDemos.Users;
-
-namespace SignalRDemos.Hubs.SimpleChat
+﻿namespace SignalRDemos.Hubs.SimpleChat
 {
 	public class SimpleChatClientSendMessage : IClientSendEvent
 	{
-		public User User { get; set; }
+		public string UserId { get; set; }
 
 		public string Message { get; set; }
 	}

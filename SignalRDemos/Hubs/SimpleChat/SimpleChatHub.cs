@@ -12,8 +12,6 @@ namespace SignalRDemos.Hubs.SimpleChat
 		{
 		}
 
-		#region Main events
-
 		/// <summary>
 		/// Handles the join event that occurs when a client requests to join a group.
 		/// </summary>
@@ -42,17 +40,13 @@ namespace SignalRDemos.Hubs.SimpleChat
 				return;
 
 			SimpleChatGroupData groupData = SimpleChatStorage.Instance.GroupData[GroupName];
-			if (!groupData.UserColors.ContainsKey(connectionInfo.User))
+			if (!groupData.UserColors.ContainsKey(connectionInfo.UserId))
 				return;
 
-			groupData.UserColors.Remove(connectionInfo.User);
+			groupData.UserColors.Remove(connectionInfo.UserId);
 
 			await Clients.Group(GroupName).BroadcastColors(GroupName);
 		}
-
-		#endregion
-
-		#region Hub-specific events
 
 		public async Task ClientSendMessage(SimpleChatClientSendMessage clientSendMessage)
 		{
@@ -68,10 +62,8 @@ namespace SignalRDemos.Hubs.SimpleChat
 			SimpleChatGroupData groupData = SimpleChatStorage.Instance.GroupData[GroupName];
 
 			// Store the new data.
-			groupData.UserColors[clientSendColor.User] = clientSendColor.Color;
+			groupData.UserColors[clientSendColor.UserId] = clientSendColor.Color;
 			await Clients.Group(GroupName).BroadcastColors(GroupName);
 		}
-
-		#endregion
 	}
 }

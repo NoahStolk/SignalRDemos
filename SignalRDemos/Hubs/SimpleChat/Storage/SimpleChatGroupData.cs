@@ -1,11 +1,9 @@
-﻿using SignalRDemos.Users;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Collections.Generic;
 
 namespace SignalRDemos.Hubs.SimpleChat.Storage
 {
 	public class SimpleChatGroupData
 	{
-		public Dictionary<User, Color> UserColors { get; set; } = new Dictionary<User, Color>();
+		public Dictionary<string, string> UserColors { get; set; } = new Dictionary<string, string>();
 	}
 }

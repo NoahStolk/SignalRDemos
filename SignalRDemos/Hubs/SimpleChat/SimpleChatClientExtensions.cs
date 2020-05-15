@@ -9,7 +9,7 @@ namespace SignalRDemos.Hubs.SimpleChat
 		{
 			SimpleChatClientReceiveMessage clientReceiveMessage = new SimpleChatClientReceiveMessage
 			{
-				User = ((IClientSendEvent)clientSendMessage).User,
+				UserId = clientSendMessage.UserId,
 				Message = clientSendMessage.Message
 			};
 

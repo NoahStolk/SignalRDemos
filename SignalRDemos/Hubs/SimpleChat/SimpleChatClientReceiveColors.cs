@@ -1,11 +1,9 @@
-﻿using SignalRDemos.Users;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Collections.Generic;
 
 namespace SignalRDemos.Hubs.SimpleChat
 {
 	public class SimpleChatClientReceiveColors
 	{
-		public Dictionary<User, Color> Colors { get; set; }
+		public Dictionary<string, string> Colors { get; set; }
 	}
 }
