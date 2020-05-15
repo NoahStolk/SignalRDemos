@@ -2,4 +2,7 @@
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 	</PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="Reinforced.Typings" Version="1.5.7" />
+	</ItemGroup>
 </Project>
