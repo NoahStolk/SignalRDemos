@@ -23,21 +23,19 @@ namespace SignalRDemos.Hubs
 		/// <summary>
 		/// Handles the join event that occurs when a client requests to join a group.
 		/// </summary>
-		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
-		public virtual async Task ClientSendJoin(ConnectionInfo connectionInfo)
+		public virtual async Task ClientSendJoin(User user)
 		{
 			await Groups.AddToGroupAsync(Context.ConnectionId, GroupName);
 
-			await Clients.Group(GroupName).ClientReceiveJoin(connectionInfo);
+			await Clients.Group(GroupName).ClientReceiveJoin(user);
 		}
 
 		/// <summary>
 		/// Handles the leave event that occurs when a client requests to leave a group.
 		/// </summary>
-		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
-		public virtual async Task ClientSendLeave(ConnectionInfo connectionInfo)
+		public virtual async Task ClientSendLeave(User user)
 		{
-			await Clients.Group(GroupName).ClientReceiveLeave(connectionInfo);
+			await Clients.Group(GroupName).ClientReceiveLeave(user);
 
 			await Groups.RemoveFromGroupAsync(Context.ConnectionId, GroupName);
 		}

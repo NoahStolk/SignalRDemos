@@ -8,15 +8,13 @@ namespace SignalRDemos.Hubs
 	public interface IClient
 	{
 		/// <summary>
-		/// Broadcasts an event to the current <see cref="IClient"/> that the member represented by the <paramref name="connectionInfo"/> has joined the group.
+		/// Broadcasts an event to the current <see cref="IClient"/> that the client represented by the <paramref name="user"/> parameter has joined the group.
 		/// </summary>
-		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
-		Task ClientReceiveJoin(ConnectionInfo connectionInfo);
+		Task ClientReceiveJoin(User user);
 
 		/// <summary>
-		/// Broadcasts an event to the current <see cref="IClient"/> that the member represented by the <paramref name="connectionInfo"/> has left the group.
+		/// Broadcasts an event to the current <see cref="IClient"/> that the client represented by the <paramref name="user"/> parameter has left the group.
 		/// </summary>
-		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
-		Task ClientReceiveLeave(ConnectionInfo connectionInfo);
+		Task ClientReceiveLeave(User user);
 	}
 }

@@ -12,7 +12,7 @@ namespace SignalRDemos
 			builder.ExportAsInterfaces(new[]
 			{
                 // Global
-				typeof(ConnectionInfo),
+				typeof(User),
 
                 // SimpleChat
                 typeof(SimpleChatClientReceiveColors),

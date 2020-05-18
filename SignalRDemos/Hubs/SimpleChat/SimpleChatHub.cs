@@ -11,13 +11,9 @@ namespace SignalRDemos.Hubs.SimpleChat
 		{
 		}
 
-		/// <summary>
-		/// Handles the join event that occurs when a client requests to join a group.
-		/// </summary>
-		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
-		public override async Task ClientSendJoin(ConnectionInfo connectionInfo)
+		public override async Task ClientSendJoin(User user)
 		{
-			await base.ClientSendJoin(connectionInfo);
+			await base.ClientSendJoin(user);
 
 			// Send already-present editing storage data to the member that just joined, if there is any.
 			if (!SimpleChatStorage.Instance.GroupData.ContainsKey(GroupName))
@@ -26,23 +22,19 @@ namespace SignalRDemos.Hubs.SimpleChat
 			await Clients.Caller.BroadcastColors(GroupName);
 		}
 
-		/// <summary>
-		/// Handles the leave event that occurs when a client requests to leave a group.
-		/// </summary>
-		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
-		public override async Task ClientSendLeave(ConnectionInfo connectionInfo)
+		public override async Task ClientSendLeave(User user)
 		{
-			await base.ClientSendLeave(connectionInfo);
+			await base.ClientSendLeave(user);
 
 			// Remove the member that just left from storage.
 			if (!SimpleChatStorage.Instance.GroupData.ContainsKey(GroupName))
 				return;
 
 			SimpleChatGroupData groupData = SimpleChatStorage.Instance.GroupData[GroupName];
-			if (!groupData.UserColors.ContainsKey(connectionInfo.UserId))
+			if (!groupData.UserColors.ContainsKey(user.UserId))
 				return;
 
-			groupData.UserColors.Remove(connectionInfo.UserId);
+			groupData.UserColors.Remove(user.UserId);
 
 			await Clients.Group(GroupName).BroadcastColors(GroupName);
 		}
