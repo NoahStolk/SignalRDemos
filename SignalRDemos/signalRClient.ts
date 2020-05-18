@@ -24,3 +24,10 @@ export interface ISimpleChatClientSendMessage {
 	userId: string;
 	message: string;
 }
+export interface ISimpleChatClientReceiveAvatars {
+	avatars: { [key: string]: string };
+}
+export interface ISimpleChatClientSendAvatar {
+	userId: string;
+	avatar: string;
+}
