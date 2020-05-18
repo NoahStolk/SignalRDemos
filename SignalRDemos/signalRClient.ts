@@ -2,8 +2,12 @@
 //     Changes to this file may cause incorrect behavior and will be lost if
 //     the code is regenerated.
 
-export interface IConnectionInfo {
+export interface IUser {
 	userId: string;
+	firstName: string;
+	lastName: string;
+	avatar: string;
+	color: string;
 }
 export interface ISimpleChatClientReceiveColors {
 	colors: { [key: string]: string };

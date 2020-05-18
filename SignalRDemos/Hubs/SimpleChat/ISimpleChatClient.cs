@@ -8,13 +8,18 @@ namespace SignalRDemos.Hubs.SimpleChat
 	public interface ISimpleChatClient : IClient
 	{
 		/// <summary>
-		/// Broadcasts a <see cref="SimpleChatClientReceiveMessage"/> to the current <see cref="ISimpleChatClient"/>.
+		/// Broadcasts a <see cref="SimpleChatClientReceiveMessage"/> event to the current <see cref="ISimpleChatClient"/>.
 		/// </summary>
 		Task ClientReceiveMessage(SimpleChatClientReceiveMessage clientReceiveMessage);
 
 		/// <summary>
-		/// Broadcasts a <see cref="SimpleChatClientReceiveColors"/> to the current <see cref="ISimpleChatClient"/>.
+		/// Broadcasts a <see cref="SimpleChatClientReceiveColors"/> event to the current <see cref="ISimpleChatClient"/>.
 		/// </summary>
 		Task ClientReceiveColors(SimpleChatClientReceiveColors clientReceiveColors);
+
+		/// <summary>
+		/// Broadcasts a <see cref="SimpleChatClientReceiveAvatars"/> event to the current <see cref="ISimpleChatClient"/>.
+		/// </summary>
+		Task ClientReceiveAvatars(SimpleChatClientReceiveAvatars clientReceiveAvatars);
 	}
 }
