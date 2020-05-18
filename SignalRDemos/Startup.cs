@@ -7,13 +7,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SignalRDemos.Hubs.SimpleChat;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace SignalRDemos
 {
 	public class Startup
 	{
-		private const string corsPolicy = "Default";
+		public static string BuildTime = "Build time not retrieved";
 
 		public IConfiguration Configuration { get; }
 		public IWebHostEnvironment Env { get; }
@@ -22,6 +25,12 @@ namespace SignalRDemos
 		{
 			Configuration = configuration;
 			Env = env;
+
+			try
+			{
+				BuildTime = File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location).ToString("yyyy MMM dd HH:mm", CultureInfo.InvariantCulture);
+			}
+			catch { }
 		}
 
 		public void ConfigureServices(IServiceCollection services)
@@ -31,14 +40,6 @@ namespace SignalRDemos
 
 			services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
 			services.Configure<KestrelServerOptions>(options => options.AllowSynchronousIO = true);
-
-			services.AddCors(options =>
-			{
-				options.AddPolicy(corsPolicy, builder =>
-				{
-					builder.WithOrigins("http://localhost:3000", "https://localhost:3000");
-				});
-			});
 
 			// Blazor
 			services.AddRazorPages();
@@ -66,8 +67,6 @@ namespace SignalRDemos
 			app.UseRouting();
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
-
-			app.UseCors(corsPolicy);
 
 			app.UseEndpoints(endpoints =>
 			{
