@@ -2,7 +2,7 @@
 //     Changes to this file may cause incorrect behavior and will be lost if
 //     the code is regenerated.
 
-export interface IUserSessionConnectionInfo {
+export interface IConnectionInfo {
 	userId: string;
 }
 export interface ISimpleChatClientReceiveColors {
