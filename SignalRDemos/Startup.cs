@@ -13,6 +13,8 @@ namespace SignalRDemos
 {
 	public class Startup
 	{
+		private const string corsPolicy = "Default";
+
 		public IConfiguration Configuration { get; }
 		public IWebHostEnvironment Env { get; }
 
@@ -29,6 +31,14 @@ namespace SignalRDemos
 
 			services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
 			services.Configure<KestrelServerOptions>(options => options.AllowSynchronousIO = true);
+
+			services.AddCors(options =>
+			{
+				options.AddPolicy(corsPolicy, builder =>
+				{
+					builder.WithOrigins("http://localhost:3000", "https://localhost:3000");
+				});
+			});
 
 			// Blazor
 			services.AddRazorPages();
@@ -56,6 +66,8 @@ namespace SignalRDemos
 			app.UseRouting();
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
+
+			app.UseCors(corsPolicy);
 
 			app.UseEndpoints(endpoints =>
 			{
