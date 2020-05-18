@@ -1,6 +1,5 @@
 ﻿using Reinforced.Typings.Fluent;
 using SignalRDemos.Hubs.SimpleChat;
-using SignalRDemos.Users;
 
 namespace SignalRDemos
 {
@@ -13,7 +12,7 @@ namespace SignalRDemos
 			builder.ExportAsInterfaces(new[]
 			{
                 // Global
-				typeof(UserSessionConnectionInfo),
+				typeof(ConnectionInfo),
 
                 // SimpleChat
                 typeof(SimpleChatClientReceiveColors),

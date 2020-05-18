@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using SignalRDemos.Hubs.SimpleChat.Storage;
-using SignalRDemos.Users;
 using System.Threading.Tasks;
 
 namespace SignalRDemos.Hubs.SimpleChat
@@ -15,8 +14,8 @@ namespace SignalRDemos.Hubs.SimpleChat
 		/// <summary>
 		/// Handles the join event that occurs when a client requests to join a group.
 		/// </summary>
-		/// <param name="connectionInfo">The <see cref="UserSessionConnectionInfo"/> object representing this member.</param>
-		public override async Task ClientSendJoin(UserSessionConnectionInfo connectionInfo)
+		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
+		public override async Task ClientSendJoin(ConnectionInfo connectionInfo)
 		{
 			await base.ClientSendJoin(connectionInfo);
 
@@ -30,8 +29,8 @@ namespace SignalRDemos.Hubs.SimpleChat
 		/// <summary>
 		/// Handles the leave event that occurs when a client requests to leave a group.
 		/// </summary>
-		/// <param name="connectionInfo">The <see cref="UserSessionConnectionInfo"/> object representing this member.</param>
-		public override async Task ClientSendLeave(UserSessionConnectionInfo connectionInfo)
+		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
+		public override async Task ClientSendLeave(ConnectionInfo connectionInfo)
 		{
 			await base.ClientSendLeave(connectionInfo);
 

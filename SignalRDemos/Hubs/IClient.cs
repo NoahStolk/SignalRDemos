@@ -1,5 +1,4 @@
-﻿using SignalRDemos.Users;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace SignalRDemos.Hubs
 {
@@ -11,13 +10,13 @@ namespace SignalRDemos.Hubs
 		/// <summary>
 		/// Broadcasts an event to the current <see cref="IClient"/> that the member represented by the <paramref name="connectionInfo"/> has joined the group.
 		/// </summary>
-		/// <param name="connectionInfo">The <see cref="UserSessionConnectionInfo"/> object representing this member.</param>
-		Task ClientReceiveJoin(UserSessionConnectionInfo connectionInfo);
+		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
+		Task ClientReceiveJoin(ConnectionInfo connectionInfo);
 
 		/// <summary>
 		/// Broadcasts an event to the current <see cref="IClient"/> that the member represented by the <paramref name="connectionInfo"/> has left the group.
 		/// </summary>
-		/// <param name="connectionInfo">The <see cref="UserSessionConnectionInfo"/> object representing this member.</param>
-		Task ClientReceiveLeave(UserSessionConnectionInfo connectionInfo);
+		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
+		Task ClientReceiveLeave(ConnectionInfo connectionInfo);
 	}
 }

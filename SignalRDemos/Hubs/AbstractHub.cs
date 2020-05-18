@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
-using SignalRDemos.Users;
 using System.Threading.Tasks;
 
 namespace SignalRDemos.Hubs
@@ -24,8 +23,8 @@ namespace SignalRDemos.Hubs
 		/// <summary>
 		/// Handles the join event that occurs when a client requests to join a group.
 		/// </summary>
-		/// <param name="connectionInfo">The <see cref="UserSessionConnectionInfo"/> object representing this member.</param>
-		public virtual async Task ClientSendJoin(UserSessionConnectionInfo connectionInfo)
+		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
+		public virtual async Task ClientSendJoin(ConnectionInfo connectionInfo)
 		{
 			await Groups.AddToGroupAsync(Context.ConnectionId, GroupName);
 
@@ -35,8 +34,8 @@ namespace SignalRDemos.Hubs
 		/// <summary>
 		/// Handles the leave event that occurs when a client requests to leave a group.
 		/// </summary>
-		/// <param name="connectionInfo">The <see cref="UserSessionConnectionInfo"/> object representing this member.</param>
-		public virtual async Task ClientSendLeave(UserSessionConnectionInfo connectionInfo)
+		/// <param name="connectionInfo">The <see cref="ConnectionInfo"/> object representing this member.</param>
+		public virtual async Task ClientSendLeave(ConnectionInfo connectionInfo)
 		{
 			await Clients.Group(GroupName).ClientReceiveLeave(connectionInfo);
 
