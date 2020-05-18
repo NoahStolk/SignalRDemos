@@ -36,9 +36,9 @@ namespace SignalRDemos.Hubs
 		/// Handles the leave event that occurs when a client requests to leave a group.
 		/// </summary>
 		/// <param name="connectionInfo">The <see cref="UserSessionConnectionInfo"/> object representing this member.</param>
-		public virtual async Task ClientSendLeave(UserSessionConnectionInfo sessionInfo)
+		public virtual async Task ClientSendLeave(UserSessionConnectionInfo connectionInfo)
 		{
-			await Clients.Group(GroupName).ClientReceiveLeave(sessionInfo);
+			await Clients.Group(GroupName).ClientReceiveLeave(connectionInfo);
 
 			await Groups.RemoveFromGroupAsync(Context.ConnectionId, GroupName);
 		}
