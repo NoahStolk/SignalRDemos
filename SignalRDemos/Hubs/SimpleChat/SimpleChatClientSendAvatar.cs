@@ -4,6 +4,6 @@
 	{
 		public string UserId { get; set; }
 
-		public char Avatar { get; set; }
+		public string Avatar { get; set; }
 	}
 }
