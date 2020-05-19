@@ -42,6 +42,12 @@ namespace SignalRDemos.Hubs.SimpleChat
 			}
 		}
 
+		public void ClearCache(string groupName)
+		{
+			if (SimpleChatStorage.Instance.GroupData.ContainsKey(groupName))
+				SimpleChatStorage.Instance.GroupData[GroupName] = new SimpleChatGroupData();
+		}
+
 		/// <summary>
 		/// Broadcasts the message.
 		/// </summary>
