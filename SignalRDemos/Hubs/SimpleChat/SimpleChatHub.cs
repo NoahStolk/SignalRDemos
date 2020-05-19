@@ -33,9 +33,10 @@ namespace SignalRDemos.Hubs.SimpleChat
 			if (!SimpleChatStorage.Instance.GroupData.TryGetValue(GroupName, out SimpleChatGroupData groupData))
 				return;
 
-			if (groupData.Users.Contains(user))
+			User dataUser = groupData.Users.FirstOrDefault(u => u.UserId == user.UserId);
+			if (dataUser != null)
 			{
-				groupData.Users.Remove(user);
+				groupData.Users.Remove(dataUser);
 
 				await Clients.Group(GroupName).BroadcastUsers(GroupName);
 			}
