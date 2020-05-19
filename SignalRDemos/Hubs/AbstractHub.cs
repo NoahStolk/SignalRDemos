@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Threading.Tasks;
 
 namespace SignalRDemos.Hubs
@@ -27,7 +28,7 @@ namespace SignalRDemos.Hubs
 		{
 			await Groups.AddToGroupAsync(Context.ConnectionId, GroupName);
 
-			await Clients.Group(GroupName).ClientReceiveJoin(user);
+			await Clients.Group(GroupName).ClientReceiveJoin(new ClientReceiveUser { User = user, DateTimeString = DateTime.Now.ToString() });
 		}
 
 		/// <summary>
@@ -35,7 +36,7 @@ namespace SignalRDemos.Hubs
 		/// </summary>
 		public virtual async Task ClientSendLeave(User user)
 		{
-			await Clients.Group(GroupName).ClientReceiveLeave(user);
+			await Clients.Group(GroupName).ClientReceiveLeave(new ClientReceiveUser { User = user, DateTimeString = DateTime.Now.ToString() });
 
 			await Groups.RemoveFromGroupAsync(Context.ConnectionId, GroupName);
 		}

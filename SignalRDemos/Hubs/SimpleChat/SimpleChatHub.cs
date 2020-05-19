@@ -14,6 +14,9 @@ namespace SignalRDemos.Hubs.SimpleChat
 
 		public override async Task ClientSendJoin(User user)
 		{
+			if (user.UserId == null)
+				return;
+
 			await base.ClientSendJoin(user);
 
 			if (!SimpleChatStorage.Instance.GroupData.ContainsKey(GroupName))

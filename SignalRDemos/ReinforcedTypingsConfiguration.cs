@@ -1,4 +1,5 @@
 ﻿using Reinforced.Typings.Fluent;
+using SignalRDemos.Hubs;
 using SignalRDemos.Hubs.SimpleChat;
 
 namespace SignalRDemos
@@ -13,6 +14,7 @@ namespace SignalRDemos
 			{
                 // Global
 				typeof(User),
+				typeof(ClientReceiveUser),
 
                 // SimpleChat
 				typeof(SimpleChatClientSendColor),
