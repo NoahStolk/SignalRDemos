@@ -16,11 +16,13 @@ namespace SignalRDemos.Hubs.SimpleChat
 		{
 			await base.ClientSendJoin(user);
 
-			// Send already-present editing storage data to the member that just joined, if there is any.
 			if (!SimpleChatStorage.Instance.GroupData.ContainsKey(GroupName))
-				return;
+				SimpleChatStorage.Instance.GroupData.Add(GroupName, new SimpleChatGroupData());
+			SimpleChatGroupData groupData = SimpleChatStorage.Instance.GroupData[GroupName];
 
-			await Clients.Caller.BroadcastColors(GroupName);
+			groupData.Users.Add(user);
+
+			await Clients.Group(GroupName).BroadcastUsers(GroupName);
 		}
 
 		public override async Task ClientSendLeave(User user)
@@ -35,7 +37,7 @@ namespace SignalRDemos.Hubs.SimpleChat
 			{
 				groupData.Users.Remove(user);
 
-				await Clients.Group(GroupName).BroadcastColors(GroupName);
+				await Clients.Group(GroupName).BroadcastUsers(GroupName);
 			}
 		}
 
@@ -62,7 +64,7 @@ namespace SignalRDemos.Hubs.SimpleChat
 			else
 				user.Color = clientSendColor.Color;
 
-			await Clients.Group(GroupName).BroadcastColors(GroupName);
+			await Clients.Group(GroupName).BroadcastUsers(GroupName);
 		}
 
 		/// <summary>
@@ -80,7 +82,7 @@ namespace SignalRDemos.Hubs.SimpleChat
 			else
 				user.Avatar = clientSendAvatar.Avatar;
 
-			await Clients.Group(GroupName).BroadcastAvatars(GroupName);
+			await Clients.Group(GroupName).BroadcastUsers(GroupName);
 		}
 	}
 }

@@ -13,13 +13,8 @@ namespace SignalRDemos.Hubs.SimpleChat
 		Task ClientReceiveMessage(SimpleChatClientReceiveMessage clientReceiveMessage);
 
 		/// <summary>
-		/// Broadcasts a <see cref="SimpleChatClientReceiveColors"/> event to the current <see cref="ISimpleChatClient"/>.
+		/// Broadcasts a <see cref="SimpleChatClientReceiveUsers"/> event to the current <see cref="ISimpleChatClient"/>.
 		/// </summary>
-		Task ClientReceiveColors(SimpleChatClientReceiveColors clientReceiveColors);
-
-		/// <summary>
-		/// Broadcasts a <see cref="SimpleChatClientReceiveAvatars"/> event to the current <see cref="ISimpleChatClient"/>.
-		/// </summary>
-		Task ClientReceiveAvatars(SimpleChatClientReceiveAvatars clientReceiveAvatars);
+		Task ClientReceiveUsers(SimpleChatClientReceiveUsers clientReceiveAvatars);
 	}
 }

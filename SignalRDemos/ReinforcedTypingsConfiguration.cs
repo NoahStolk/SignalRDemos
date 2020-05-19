@@ -15,12 +15,11 @@ namespace SignalRDemos
 				typeof(User),
 
                 // SimpleChat
-                typeof(SimpleChatClientReceiveColors),
 				typeof(SimpleChatClientSendColor),
-				typeof(SimpleChatClientReceiveMessage),
 				typeof(SimpleChatClientSendMessage),
-				typeof(SimpleChatClientReceiveAvatars),
-				typeof(SimpleChatClientSendAvatar)
+				typeof(SimpleChatClientSendAvatar),
+				typeof(SimpleChatClientReceiveMessage),
+				typeof(SimpleChatClientReceiveUsers)
 			},
 			b => b.WithPublicProperties().DontIncludeToNamespace());
 		}
