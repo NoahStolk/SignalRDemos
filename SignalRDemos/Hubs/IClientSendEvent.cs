@@ -2,6 +2,6 @@
 {
 	public interface IClientSendEvent
 	{
-		public string UserId { get; set; }
+		string UserId { get; set; }
 	}
 }
